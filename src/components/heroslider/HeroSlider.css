@@ -1,0 +1,59 @@
+.hero_slider {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  padding: 10px auto; 
+  background: transparent;
+
+}
+
+.heroSwiper {
+  margin-top: 10px;
+  width: 75%;
+  max-width: 1400px;
+  height: 420px; 
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ffffff;
+  padding: 20px; 
+}
+
+.swiper-slide img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.05));
+}
+
+.swiper-slide:hover img {
+  transform: scale(1.05);
+}
+
+@media (max-width: 1024px) {
+  .heroSwiper {
+    height: 350px;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroSwiper {
+    width: 95%;
+    height: 280px;
+    border-radius: 20px;
+  }
+  .swiper-slide {
+    padding: 10px;
+  }
+}

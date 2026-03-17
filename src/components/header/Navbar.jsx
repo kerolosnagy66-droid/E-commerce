@@ -2,11 +2,10 @@ import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { IoMdMenu } from "react-icons/io";
 import { IoMdArrowDropdown } from "react-icons/io";
-import { MdOutlineLogin } from "react-icons/md";
+import { MdOutlineLogin, MdOutlineLogout } from "react-icons/md";
 import { FaUserPlus } from "react-icons/fa6";
-
-
-
+import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 
 const Navlinks = [
@@ -17,15 +16,20 @@ const Navlinks = [
   {name: "Contact", path: "/contact"},
 ]
 
-function Navbar() {
+function Navbar(props) {
   const location = useLocation();
+  const navigate = useNavigate();
+  const {isLoggedIn, categories} = props;
   const [showCategories, setShowCategories] = useState(false);
-  const [categories, setCategories] = useState([]);
-  useEffect(() => {
-    fetch('https://dummyjson.com/products/categories')
-    .then(res => res.json())
-    .then(data => setCategories(data));
-  }, []);
+  
+  const handleLogOut = () => {
+    if (props.logOut) {
+      props.logOut();
+    } else {
+      toast.success('Successfully logged out!');
+      navigate('/login');
+    }
+  };
   
   return (
     <div className='navbar'>
@@ -40,7 +44,7 @@ function Navbar() {
           <div className={`categories_nav ${showCategories ? "show" : ""}`}>
             {categories.map((category, index) => (
               <div key={index} className="categories_nav_links">
-                <Link to={category.slug} onClick={() => setShowCategories(false)}>{category.name}</Link>
+                <Link to={`/category/${category.slug}`} onClick={() => setShowCategories(false)}>{category.name}</Link>
               </div>
             ))}
           </div>
@@ -55,8 +59,20 @@ function Navbar() {
         </ul>
 
         <div className='header_icon'>
-          <Link to="/login"><MdOutlineLogin /></Link>
-          <Link to="/register"><FaUserPlus /></Link>
+          {!isLoggedIn ? (
+            <>
+              <Link to="/login" className={location.pathname === "/login" ? "active" : ""}><MdOutlineLogin />Login</Link>
+              <Link to="/register" className={location.pathname === "/register" ? "active" : ""}><FaUserPlus />Register</Link>
+            </>
+          ) : (
+            <span 
+              className="nav-link" 
+              onClick={handleLogOut} 
+              style={{color:'red', cursor:'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '15px', fontWeight: '500'}}
+            >
+              <MdOutlineLogout style={{fontSize: '20px'}} />Logout
+            </span>
+          )}
         </div>
       </div>
     </div>

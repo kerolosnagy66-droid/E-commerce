@@ -8,8 +8,8 @@
 
 :root {
   --main-color: #0b116e;
-  --main-color-hover: #0fb885;
-  --p_color: #7b7b7b;
+  --main-color-hover: #0b116e;
+  --p_color: #0b116e;
   --bg-color: #f8f9fa;
   --white-color: #ffffff;
   --black-color: #212529;
@@ -69,4 +69,29 @@ button {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 15px;
+}
+
+/* Loading States */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  width: 100%;
+  gap: 1.5rem;
+  padding: 2rem 0;
+}
+
+.loading-spinner {
+  color: var(--main-color);
+  animation: fa-spin 2s infinite linear;
+}
+
+.loading-text {
+  font-family: "DM Sans", sans-serif;
+  color: var(--main-color);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  opacity: 0.8;
 }

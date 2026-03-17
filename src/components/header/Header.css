@@ -187,9 +187,13 @@
   transition: var(--transition);
   display: flex;
   align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  text-decoration: none;
 }
 
-.navbar .container .nav_links li.active a {
+.navbar .container .nav_links li.active a,
+.navbar .container .header_icon a.active {
   color: var(--white-color);
   font-weight: 700;
 }
@@ -202,7 +206,10 @@
 .navbar .container .header_icon {
   display: flex;
   align-items: center;
-  gap: 20px;
-  font-size: 20px;
+  gap: 25px;
   justify-self: end;
+}
+
+.navbar .container .header_icon a svg {
+  font-size: 20px;
 }

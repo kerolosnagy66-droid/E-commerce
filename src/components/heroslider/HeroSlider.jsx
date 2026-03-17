@@ -1,15 +1,17 @@
 import React, { useMemo } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import { Autoplay } from 'swiper/modules';
 
 import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-import './Slider.css';
+import './HeroSlider.css';
 
-const allImages = Array.from({ length: 24 }, (_, i) => require(`../../img/${i + 1}.jpg`));
+const imageContext = require.context('../../img', false, /\.(jpg|jpeg|png|webp)$/);
+const allImages = imageContext.keys()
+  .filter(path => !path.includes('logo')) // Exclude logo from slider
+  .map(imageContext);
 
-const Slider = () => {
+
+const HeroSlider = () => {
   const shuffledImages = useMemo(() => {
     return [...allImages].sort(() => Math.random() - 0.5);
   }, []);
@@ -21,10 +23,8 @@ const Slider = () => {
                 spaceBetween={0}
                 centeredSlides={true}
                 autoplay={{ delay: 3000, disableOnInteraction: false }}
-                pagination={{ clickable: true }}
-                navigation={true}
-                modules={[Autoplay, Pagination, Navigation]}
-                className="mySwiper"
+                modules={[Autoplay]}
+                className="heroSwiper"
             >
                 {shuffledImages.map((image, index) => (
                     <SwiperSlide key={index}>
@@ -37,4 +37,4 @@ const Slider = () => {
   );
 };
 
-export default Slider;
+export default HeroSlider;

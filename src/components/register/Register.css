@@ -1,0 +1,105 @@
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    background-color: #f8f9fa;
+    padding: 40px 20px;
+}
+
+.register-box {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 450px;
+    transition: transform 0.3s ease;
+}
+
+.register-box:hover {
+    transform: translateY(-5px);
+}
+
+.register-box h2 {
+    font-family: "DM Sans", sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--main-color);
+    text-align: center;
+    margin-bottom: 30px;
+    letter-spacing: -0.5px;
+}
+
+.register-box form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.register-box .input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.register-box .input-group input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1.5px solid #e1e4e8;
+    border-radius: 8px;
+    font-family: "Inter", sans-serif;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    background-color: #fff;
+}
+
+.register-box .input-group input:focus {
+    border-color: var(--main-color);
+    box-shadow: 0 0 0 4px rgba(11, 17, 110, 0.1);
+    outline: none;
+}
+
+.register-box form button {
+    margin-top: 10px;
+    padding: 14px;
+    background-color: var(--main-color);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.register-box form button:hover {
+    background-color: #080d5a;
+    box-shadow: 0 4px 12px rgba(11, 17, 110, 0.2);
+}
+
+.register-box form p {
+    text-align: center;
+    margin-top: 20px;
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    color: #718096;
+}
+
+.register-box form p a {
+    color: var(--main-color);
+    font-weight: 600;
+    text-decoration: none;
+    margin-left: 5px;
+}
+
+.register-box form p a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+    .register-box {
+        padding: 30px 20px;
+    }
+}
