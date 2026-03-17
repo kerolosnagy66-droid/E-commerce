@@ -1,4 +1,3 @@
-import './Login.css'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
@@ -23,8 +22,8 @@ const Login = ({ setIsLoggedIn }) => {
     }
   return (
     <div>
-        <div className="login-container">
-            <div className="login-box">
+        <div className="auth-container">
+            <div className="auth-box">
                 <h2>Login</h2>
                 <form onSubmit={handleLogin}>
                     <div className="input-group">
@@ -34,7 +33,7 @@ const Login = ({ setIsLoggedIn }) => {
                         <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                     </div>
                     <div className="input-group checkbox-group">
-                        <input type="checkbox" checked={remember} onChange={(e) => setRemember(e.target.checked)} />
+                        <input type="checkbox" checked={remember} onChange={(e) => setRemember(e.target.checked)} id="remember" />
                         <label htmlFor="remember">Remember me</label>
                     </div>
                     <button type="submit">Login</button>

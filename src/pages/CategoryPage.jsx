@@ -1,31 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import SlideProducts from '../components/slideProducts/SlideProducts';
+import Loading from '../components/Loading';
+import useFetch from '../hooks/useFetch';
 
 const CategoryPage = () => {
   const { slug } = useParams();
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setLoading(true);
-    fetch(`https://dummyjson.com/products/category/${slug}`)
-      .then(res => res.json())
-      .then(data => {
-        setProducts(data.products);
-        setLoading(false);
-      });
-  }, [slug]);
+  const { data, loading } = useFetch(`https://dummyjson.com/products/category/${slug}`);
+  const products = data?.products || [];
 
   const categoryName = slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 
   if (loading) {
-    return (
-      <div className='loading-container'>
-        <i className='fa fa-spinner fa-4x loading-spinner'></i>
-        <p className='loading-text'>Loading {categoryName}...</p>
-      </div>
-    );
+    return <Loading text={`Loading ${categoryName}...`} />;
   }
 
   return (

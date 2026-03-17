@@ -1,4 +1,3 @@
-import './Register.css'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
@@ -40,8 +39,8 @@ const Register = ({ setIsLoggedIn }) => {
     
   return (
     <div>
-        <div className="register-container">
-            <div className="register-box">
+        <div className="auth-container">
+            <div className="auth-box">
                 <h2>Register</h2>
                 <form onSubmit={handleRegister}>
                     <div className="input-group">

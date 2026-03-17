@@ -6,16 +6,19 @@ import Home from './pages/Home';
 import Footer from './components/footer/Footer';
 import Login from './components/login/Login';
 import Register from './components/register/Register';
+import ProductDetails from './pages/ProductDetails';
 import { Toaster } from 'react-hot-toast';
 import { useState, useEffect } from 'react';
 import CategoryPage from './pages/CategoryPage';
 import { Shop, Blog, About, Contact } from './pages/PlaceholderPages';
 
 function App() {
+
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
     return localStorage.getItem('isLoggedIn') === 'true';
   });
   const [categories, setCategories] = useState([]);
+ 
 
   useEffect(() => {
     fetch('https://dummyjson.com/products/categories')
@@ -34,6 +37,7 @@ function App() {
 
   return (
     <>
+    
     <Toaster position="top-center" reverseOrder={false} />
     <div className="app"> 
       <header>
@@ -43,6 +47,7 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<Home categories={categories} />} />
+          <Route path="/productDetails/:id" element={<ProductDetails />} />
           <Route path="/login" element={<Login setIsLoggedIn={handleSetIsLoggedIn} />} />
           <Route path="/register" element={<Register setIsLoggedIn={handleSetIsLoggedIn} />} />
           <Route path="/category/:slug" element={<CategoryPage />} />

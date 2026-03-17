@@ -6,6 +6,7 @@ import './SlideProducts.css';
 import { Pagination, Autoplay } from 'swiper/modules';
 import { FaStar, FaStarHalfStroke, FaHeart, FaCartPlus } from "react-icons/fa6";
 import { IoIosShareAlt } from "react-icons/io";
+import { Link } from 'react-router-dom';
 
 const Products = React.memo(({ title, productList }) => {
   const { safeTitle, paginationClass } = useMemo(() => {
@@ -45,7 +46,9 @@ const Products = React.memo(({ title, productList }) => {
           <SwiperSlide key={`${safeTitle}-${product.id}`}>
             <div className="product-card">
               <div className="product-img-box">
+                <Link to={`/productDetails/${product.id}`}>
                 <img src={product.thumbnail} alt={product.title} className="product-img" />
+                </Link>
               </div>
               <div className="product-info">
                 <h3>{product.title}</h3>
