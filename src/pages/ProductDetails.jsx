@@ -2,20 +2,28 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import useFetch from '../hooks/useFetch'
 import Loading from '../components/Loading'
-import { FaHeart, FaCartPlus } from "react-icons/fa6";
+import { FaHeart, FaCartPlus, FaCheck } from "react-icons/fa6";
 import { IoIosShareAlt } from "react-icons/io";
 import './ProductDetails.css';
+import { useCart } from '../components/context/CartContext';
 
 function ProductDetails() {
     const { id } = useParams();
     const { data: product, loading, error } = useFetch(`https://dummyjson.com/products/${id}`);
     const [selectedImage, setSelectedImage] = useState('');
+    const { addToCart, cart } = useCart();
 
     useEffect(() => {
         if (product && product.thumbnail) {
             setSelectedImage(product.thumbnail);
         }
     }, [product]);
+
+    const handleAddToCart = () => {
+        addToCart(product);
+    };
+
+    const isInCart = cart.some(item => item.id === parseInt(id));
 
     if (loading) return <Loading text="Loading product details..." />;
     if (error) return <div className="container">Error: {error}</div>;
@@ -53,8 +61,11 @@ function ProductDetails() {
                         )}
                     </div>
                     <div className="product-actions">
-                        <button className="add-to-cart-btn">
-                            <FaCartPlus /> Add to Cart
+                        <button 
+                            className={`add-to-cart-btn ${isInCart ? 'active' : ''}`} 
+                            onClick={handleAddToCart}
+                        >
+                            {isInCart ? <><FaCheck /> Added to Cart</> : <><FaCartPlus /> Add to Cart</>}
                         </button>
                         <button className="fav-btn"><FaHeart /></button>
                         <button className="share-btn"><IoIosShareAlt /></button>

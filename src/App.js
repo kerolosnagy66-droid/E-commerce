@@ -11,7 +11,7 @@ import { Toaster } from 'react-hot-toast';
 import { useState, useEffect } from 'react';
 import CategoryPage from './pages/CategoryPage';
 import { Shop, Blog, About, Contact } from './pages/PlaceholderPages';
-
+import Cart from './pages/Cart';
 function App() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
@@ -55,6 +55,7 @@ function App() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
       </main>
       <footer>

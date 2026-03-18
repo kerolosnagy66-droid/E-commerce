@@ -7,8 +7,11 @@ import { Pagination, Autoplay } from 'swiper/modules';
 import { FaStar, FaStarHalfStroke, FaHeart, FaCartPlus } from "react-icons/fa6";
 import { IoIosShareAlt } from "react-icons/io";
 import { Link } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
+import { FaCheck } from "react-icons/fa6";
 
 const Products = React.memo(({ title, productList }) => {
+  const { addToCart, cart } = useCart();
   const { safeTitle, paginationClass } = useMemo(() => {
     const st = title?.replace(/[^a-zA-Z0-9]/g, '') || 'default';
     return {
@@ -20,7 +23,6 @@ const Products = React.memo(({ title, productList }) => {
   if (!productList || productList.length === 0) {
     return <div className="no-products">No products found for this category.</div>;
   }
-
   return (
     <div className="slideProducts-slider-container">
       <Swiper
@@ -47,7 +49,12 @@ const Products = React.memo(({ title, productList }) => {
             <div className="product-card">
               <div className="product-img-box">
                 <Link to={`/productDetails/${product.id}`}>
-                <img src={product.thumbnail} alt={product.title} className="product-img" />
+                  {cart.some(item => item.id === product.id) && (
+                    <div className="in-cart-badge">
+                      <FaCheck />
+                    </div>
+                  )}
+                  <img src={product.thumbnail} alt={product.title} className="product-img" />
                 </Link>
               </div>
               <div className="product-info">
@@ -57,7 +64,12 @@ const Products = React.memo(({ title, productList }) => {
                     <FaStar/><FaStar/><FaStar/><FaStar/><FaStarHalfStroke/>
                 </div>
                 <div className="product-buttons" >
-                    <button className="add-to-cart-btn"><FaCartPlus/></button>
+                    <button 
+                      className={`add-to-cart-btn ${cart.some(item => item.id === product.id) ? 'active' : ''}`} 
+                      onClick={() => addToCart(product)}
+                    >
+                      {cart.some(item => item.id === product.id) ? <FaCheck /> : <FaCartPlus />}
+                    </button>
                     <button className="add-to-cart-btn"><FaHeart/></button>
                     <button className="add-to-cart-btn"><IoIosShareAlt/></button>
                 </div>

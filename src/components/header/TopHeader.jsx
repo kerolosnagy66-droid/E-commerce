@@ -1,12 +1,15 @@
 import React from 'react'
 import './Header.css'
 import logo from '../../img/logo.png'
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { FaSearch } from "react-icons/fa";
 import { FiHeart } from "react-icons/fi";
 import { BsCart4 } from "react-icons/bs";
+import { useCart } from '../context/CartContext';
 
 const TopHeader = () => {
+  const { totalItems } = useCart();
+
   return (
     <div className='top-header' >
       <div className='container'>
@@ -20,10 +23,10 @@ const TopHeader = () => {
             <FiHeart/>
             <span className='count'>0</span>
           </div>
-          <div className="icon-wrapper">
+          <Link to="/cart" className="icon-wrapper">
             <BsCart4/>
-            <span className='count'>0</span> 
-          </div>
+            <span className='count'>{totalItems}</span> 
+          </Link>
         </div>
       </div>
     </div>
