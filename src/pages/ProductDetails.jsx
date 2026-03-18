@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import useFetch from '../hooks/useFetch'
 import Loading from '../components/Loading'
@@ -9,8 +9,15 @@ import './ProductDetails.css';
 function ProductDetails() {
     const { id } = useParams();
     const { data: product, loading, error } = useFetch(`https://dummyjson.com/products/${id}`);
+    const [selectedImage, setSelectedImage] = useState('');
 
-    if (loading) return <Loading text="Fetching product details..." />;
+    useEffect(() => {
+        if (product && product.thumbnail) {
+            setSelectedImage(product.thumbnail);
+        }
+    }, [product]);
+
+    if (loading) return <Loading text="Loading product details..." />;
     if (error) return <div className="container">Error: {error}</div>;
     if (!product) return <div className="container">Product not found.</div>;
   return (
@@ -18,8 +25,23 @@ function ProductDetails() {
     <div className="product-details-page">
         <div className='container'>
             <div className="product-details">
-                <div className="product-img-box">
-                    <img src={product.thumbnail} alt={product.title} />
+                <div className="product-img-group">
+                    <div className="product-img-box">
+                        <img src={selectedImage} alt={product.title} />
+                    </div>
+                    {product.images && product.images.length > 0 && (
+                        <div className="product-thumbnails">
+                            {[product.thumbnail, ...product.images.filter(img => img !== product.thumbnail)].map((img, index) => (
+                                <div 
+                                    key={index} 
+                                    className={`thumbnail ${selectedImage === img ? 'active' : ''}`}
+                                    onClick={() => setSelectedImage(img)}
+                                >
+                                    <img src={img} alt={`Thumbnail ${index}`} />
+                                </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
                 <div className="product-info">
                     <h2>{product.title}</h2>

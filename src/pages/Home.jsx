@@ -28,11 +28,11 @@ function Home({ categories }) {
     
     
     if (loading) {
-        return <Loading text="Fetching the best products for you..." />;
+        return <Loading text="Loading products..." />;
     }
     
     if (error) {
-        return <div className='loading-container' style={{color: 'red'}}>
+        return <div className='container' style={{color: 'red'}}>
             <p>Error loading products: {error.message}</p>
         </div>;
     }
