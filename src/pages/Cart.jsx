@@ -6,7 +6,6 @@ import './Cart.css';
 
 const Cart = () => {
     const { cart, totalItems, totalPrice, updateQuantity, removeFromCart, clearCart } = useCart();
-
     if (cart.length === 0) {
         return (
             <div className="cart-empty container">

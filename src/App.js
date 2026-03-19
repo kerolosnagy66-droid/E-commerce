@@ -12,6 +12,12 @@ import { useState, useEffect } from 'react';
 import CategoryPage from './pages/CategoryPage';
 import { Shop, Blog, About, Contact } from './pages/PlaceholderPages';
 import Cart from './pages/Cart';
+import Favourite from './pages/favourite';
+import { CartProvider } from './components/context/CartContext';
+import { FavouriteProvider } from './components/context/favouriteContext';
+import ScrollToTop from './components/ScrollToTop/ScrollToTop';
+import ProtectedRoute from './components/ProtectedRoute';
+
 function App() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
@@ -37,33 +43,53 @@ function App() {
 
   return (
     <>
-    
     <Toaster position="top-center" reverseOrder={false} />
-    <div className="app"> 
-      <header>
-        <TopHeader />
-        <Navbar isLoggedIn={isLoggedIn} logOut={logOut} categories={categories} />
-      </header>
-      <main>
-        <Routes>
-          <Route path="/" element={<Home categories={categories} />} />
-          <Route path="/productDetails/:id" element={<ProductDetails />} />
-          <Route path="/login" element={<Login setIsLoggedIn={handleSetIsLoggedIn} />} />
-          <Route path="/register" element={<Register setIsLoggedIn={handleSetIsLoggedIn} />} />
-          <Route path="/category/:slug" element={<CategoryPage />} />
-          <Route path="/shop" element={<Shop />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/cart" element={<Cart />} />
-        </Routes>
-      </main>
-      <footer>
-        <Footer />
-      </footer>
-    </div>
+    <CartProvider isLoggedIn={isLoggedIn}>
+      <FavouriteProvider isLoggedIn={isLoggedIn}>
+        <div className="app"> 
+          <header>
+            <TopHeader isLoggedIn={isLoggedIn} />
+            <Navbar isLoggedIn={isLoggedIn} logOut={logOut} categories={categories} />
+          </header>
+          <main>
+            <Routes>
+              <Route path="/" element={<Home categories={categories} />} />
+              <Route path="/productDetails/:id" element={<ProductDetails />} />
+              <Route path="/login" element={<Login setIsLoggedIn={handleSetIsLoggedIn} />} />
+              <Route path="/register" element={<Register setIsLoggedIn={handleSetIsLoggedIn} />} />
+              <Route path="/category/:slug" element={<CategoryPage />} />
+              <Route path="/shop" element={<Shop />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route 
+                path="/cart" 
+                element={
+                  <ProtectedRoute isLoggedIn={isLoggedIn}>
+                    <Cart />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/favourite" 
+                element={
+                  <ProtectedRoute isLoggedIn={isLoggedIn}>
+                    <Favourite />
+                  </ProtectedRoute>
+                } 
+              />
+            </Routes>
+          </main>
+          <footer>
+            <Footer />
+          </footer>
+          <ScrollToTop />
+        </div>
+      </FavouriteProvider>
+    </CartProvider>
     </>
   );
+
 }
 
 export default App;

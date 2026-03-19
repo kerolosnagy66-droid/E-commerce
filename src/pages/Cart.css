@@ -204,11 +204,13 @@
     }
 }
 
+
 @media (max-width: 576px) {
     .cart-item {
         flex-direction: column;
         text-align: center;
     }
+
     
     .item-total {
         text-align: center;

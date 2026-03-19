@@ -6,9 +6,11 @@ import { FaSearch } from "react-icons/fa";
 import { FiHeart } from "react-icons/fi";
 import { BsCart4 } from "react-icons/bs";
 import { useCart } from '../context/CartContext';
+import { useFavourite } from '../context/favouriteContext';
 
-const TopHeader = () => {
+const TopHeader = ({ isLoggedIn }) => {
   const { totalItems } = useCart();
+  const { favourites } = useFavourite();
 
   return (
     <div className='top-header' >
@@ -19,14 +21,18 @@ const TopHeader = () => {
           <button type='submit'> <FaSearch/></button>
         </form>
         <div className="header-icon">
-          <div className="icon-wrapper">
-            <FiHeart/>
-            <span className='count'>0</span>
-          </div>
-          <Link to="/cart" className="icon-wrapper">
-            <BsCart4/>
-            <span className='count'>{totalItems}</span> 
-          </Link>
+          {isLoggedIn && (
+            <>
+              <Link to="/favourite" className="icon-wrapper">
+                <FiHeart/>
+                <span className='count'>{favourites.length}</span>
+              </Link>
+              <Link to="/cart" className="icon-wrapper">
+                <BsCart4/>
+                <span className='count'>{totalItems}</span> 
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </div>

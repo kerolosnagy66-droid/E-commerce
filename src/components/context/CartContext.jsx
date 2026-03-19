@@ -4,7 +4,7 @@ import { toast } from 'react-hot-toast';
 export const CartContext = createContext();
 export const useCart = () => useContext(CartContext);
 
-export const CartProvider = ({ children }) => {
+export const CartProvider = ({ children, isLoggedIn }) => {
     const [cart, setCart] = useState(() => {
         const savedCart = localStorage.getItem('cart');
         return savedCart ? JSON.parse(savedCart) : [];
@@ -23,6 +23,10 @@ export const CartProvider = ({ children }) => {
     }, [cart]);
 
     const addToCart = (product, quantity = 1) => {
+        if (!isLoggedIn) {
+            toast.error('Please login to add items to your cart!');
+            return;
+        }
         const existingItem = cart.find(item => item.id === product.id);
         
         if (existingItem) {
@@ -43,6 +47,7 @@ export const CartProvider = ({ children }) => {
             }
         });
     };
+
 
     const removeFromCart = (productId) => {
         setCart(prevCart => prevCart.filter(item => item.id !== productId));
@@ -70,6 +75,7 @@ export const CartProvider = ({ children }) => {
                 cart,
                 totalItems,
                 totalPrice,
+                isLoggedIn,
                 addToCart,
                 removeFromCart,
                 updateQuantity,

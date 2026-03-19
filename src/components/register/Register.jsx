@@ -19,11 +19,11 @@ const Register = ({ setIsLoggedIn }) => {
             return
         }
 
-        toast.success('Registration successful!')
-        setIsLoggedIn(true)
+        toast.success('Registration successful! Please login');
         setTimeout(() => {
-            navigate('/')
+            navigate('/login')
         }, 1000)
+
     }
     function validateRegisterForm(user) {
     const schema = Joi.object({
@@ -55,7 +55,7 @@ const Register = ({ setIsLoggedIn }) => {
                     <div className="input-group">
                         <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
                     </div>
-                    <button type="submit">Register</button>
+                    <button type="submit" >Register</button>
                     <p>Already have an account? <Link to="/login">Login</Link></p>
                 </form>
             </div>

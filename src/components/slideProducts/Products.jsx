@@ -8,10 +8,12 @@ import { FaStar, FaStarHalfStroke, FaHeart, FaCartPlus } from "react-icons/fa6";
 import { IoIosShareAlt } from "react-icons/io";
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { useFavourite } from '../context/favouriteContext';
 import { FaCheck } from "react-icons/fa6";
 
 const Products = React.memo(({ title, productList }) => {
-  const { addToCart, cart } = useCart();
+  const { addToCart, cart, isLoggedIn } = useCart();
+  const { addToFavourite, favourites } = useFavourite();
   const { safeTitle, paginationClass } = useMemo(() => {
     const st = title?.replace(/[^a-zA-Z0-9]/g, '') || 'default';
     return {
@@ -64,13 +66,24 @@ const Products = React.memo(({ title, productList }) => {
                     <FaStar/><FaStar/><FaStar/><FaStar/><FaStarHalfStroke/>
                 </div>
                 <div className="product-buttons" >
-                    <button 
-                      className={`add-to-cart-btn ${cart.some(item => item.id === product.id) ? 'active' : ''}`} 
-                      onClick={() => addToCart(product)}
-                    >
-                      {cart.some(item => item.id === product.id) ? <FaCheck /> : <FaCartPlus />}
-                    </button>
-                    <button className="add-to-cart-btn"><FaHeart/></button>
+                    {isLoggedIn ? (
+                      <>
+                        <button 
+                          className={`add-to-cart-btn ${cart.some(item => item.id === product.id) ? 'active' : ''}`} 
+                          onClick={() => addToCart(product)}
+                        >
+                          {cart.some(item => item.id === product.id) ? <FaCheck /> : <FaCartPlus />}
+                        </button>
+                        <button 
+                          className={`add-to-cart-btn ${favourites.some(item => item.id === product.id) ? 'active' : ''}`} 
+                          onClick={() => addToFavourite(product)}
+                        >
+                          <FaHeart />
+                        </button>
+                      </>
+                    ) : (
+                      <p className="login-to-add">Login to shop</p>
+                    )}
                     <button className="add-to-cart-btn"><IoIosShareAlt/></button>
                 </div>
               </div>
