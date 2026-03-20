@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 import { useFavourite } from '../../context/favouriteContext';
 import { FaCheck } from "react-icons/fa6";
+import { toast } from 'react-hot-toast';
 
 const Products = React.memo(({ title, productList }) => {
   const { addToCart, cart, isLoggedIn } = useCart();
@@ -21,6 +22,30 @@ const Products = React.memo(({ title, productList }) => {
       paginationClass: `pagination-${st}`
     };
   }, [title]);
+
+  const handleShare = (product) => {
+    const shareData = {
+      title: product.title,
+      text: `Check out this ${product.title} on our store!`,
+      url: `${window.location.origin}/productDetails/${product.id}`
+    };
+
+    if (navigator.share) {
+      navigator.share(shareData).catch(() => {
+        copyToClipboard(shareData.url);
+      });
+    } else {
+      copyToClipboard(shareData.url);
+    }
+  };
+
+  const copyToClipboard = (url) => {
+    navigator.clipboard.writeText(url).then(() => {
+      toast.success('Link copied to clipboard!');
+    }).catch(() => {
+      toast.error('Failed to copy link.');
+    });
+  };
 
   if (!productList || productList.length === 0) {
     return <div className="no-products">No products found for this category.</div>;
@@ -82,9 +107,15 @@ const Products = React.memo(({ title, productList }) => {
                         </button>
                       </>
                     ) : (
-                      <p className="login-to-add">Login to shop</p>
+                      <Link to="/login" className="login-to-add">Login to shop</Link>
                     )}
-                    <button className="add-to-cart-btn"><IoIosShareAlt/></button>
+                    <button 
+                      className="share-btn" 
+                      onClick={() => handleShare(product)}
+                      title="Share Product"
+                    >
+                      <IoIosShareAlt/>
+                    </button>
                 </div>
               </div>
             </div>

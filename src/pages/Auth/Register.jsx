@@ -39,27 +39,25 @@ const Register = () => {
 
     
   return (
-    <div>
-        <div className="auth-container">
-            <div className="auth-box">
-                <h2>Register</h2>
-                <form onSubmit={handleRegister}>
-                    <div className="input-group">
-                        <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
-                    </div>
-                    <div className="input-group">
-                        <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                    </div>
-                    <div className="input-group">
-                        <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                    </div>
-                    <div className="input-group">
-                        <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
-                    </div>
-                    <button type="submit" >Register</button>
-                    <p>Already have an account? <Link to="/login">Login</Link></p>
-                </form>
-            </div>
+    <div className="auth-container">
+        <div className="auth-box">
+            <h2>Register</h2>
+            <form onSubmit={handleRegister}>
+                <div className="input-group">
+                    <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
+                </div>
+                <div className="input-group">
+                    <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                </div>
+                <div className="input-group">
+                    <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                </div>
+                <div className="input-group">
+                    <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+                </div>
+                <button type="submit" >Register</button>
+                <p>Already have an account? <Link to="/login">Login</Link></p>
+            </form>
         </div>
     </div>
   )

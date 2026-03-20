@@ -4,7 +4,6 @@ import { FaFacebook, FaInstagram, FaLinkedin } from 'react-icons/fa'
 import { FaXTwitter } from "react-icons/fa6";
 const Footer = () => {
   return (
-    <div>
     <footer className="footer">
       <div className="container">
         <div className="footer-grid">
@@ -45,7 +44,6 @@ const Footer = () => {
         </div>
       </div>
     </footer>
-    </div>
   )
 }
 

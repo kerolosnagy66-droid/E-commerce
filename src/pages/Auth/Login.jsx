@@ -23,25 +23,23 @@ const Login = () => {
         }
     }
   return (
-    <div>
-        <div className="auth-container">
-            <div className="auth-box">
-                <h2>Login</h2>
-                <form onSubmit={handleLogin}>
-                    <div className="input-group">
-                        <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                    </div>
-                    <div className="input-group">
-                        <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                    </div>
-                    <div className="input-group checkbox-group">
-                        <input type="checkbox" checked={remember} onChange={(e) => setRemember(e.target.checked)} id="remember" />
-                        <label htmlFor="remember">Remember me</label>
-                    </div>
-                    <button type="submit">Login</button>
-                    <p>Don't have an account? <Link to="/register">Register</Link></p>
-                </form>
-            </div>
+    <div className="auth-container">
+        <div className="auth-box">
+            <h2>Login</h2>
+            <form onSubmit={handleLogin}>
+                <div className="input-group">
+                    <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                </div>
+                <div className="input-group">
+                    <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                </div>
+                <div className="input-group checkbox-group">
+                    <input type="checkbox" checked={remember} onChange={(e) => setRemember(e.target.checked)} id="remember" />
+                    <label htmlFor="remember">Remember me</label>
+                </div>
+                <button type="submit">Login</button>
+                <p>Don't have an account? <Link to="/register">Register</Link></p>
+            </form>
         </div>
     </div>
   )

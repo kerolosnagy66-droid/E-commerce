@@ -40,7 +40,6 @@ export const FavouriteProvider = ({ children }) => {
         setFavourites((prev) => prev.filter((item) => item.id !== productId));
     };
 
-
     return (
         <FavouriteContext.Provider value={{ favourites, isLoggedIn, addToFavourite, removeFromFavourite }}>
             {children}

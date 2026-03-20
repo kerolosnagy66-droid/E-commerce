@@ -1,6 +1,5 @@
 import React, { createContext, useState, useEffect, useContext, useMemo } from 'react'
 import { toast } from 'react-hot-toast';
-
 import { useAuth } from './AuthContext';
 
 export const CartContext = createContext();
@@ -45,12 +44,10 @@ export const CartProvider = ({ children }) => {
                         ? { ...item, quantity: item.quantity + quantity }
                         : item
                 );
-            } else {
-                return [...prevCart, { ...product, quantity }];
             }
+            return [...prevCart, { ...product, quantity }];
         });
     };
-
 
     const removeFromCart = (productId) => {
         setCart(prevCart => prevCart.filter(item => item.id !== productId));

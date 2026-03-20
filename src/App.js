@@ -10,13 +10,15 @@ import ProductDetails from './pages/ProductDetails/ProductDetails';
 import { Toaster } from 'react-hot-toast';
 import { useState, useEffect } from 'react';
 import CategoryPage from './pages/Categories/CategoryPage';
-import { Shop, Blog } from './pages/PlaceholderPages';
+import Shop from './pages/Shop/Shop';
 import Cart from './pages/Cart/Cart';
 import Favourite from './pages/Favourite/Favourite';
 import ScrollToTop from './components/common/ScrollToTop';
 import ProtectedRoute from './components/common/ProtectedRoute';
 import AboutUs from './pages/About/AboutUs';
 import ContactUs from './pages/Contact/ContactUs';
+import { ShippingInfo, Returns, PrivacyPolicy, Terms } from './pages/Legal/LegalPages';
+import Checkout from './pages/Checkout/Checkout';
 
 function App() {
   const [categories, setCategories] = useState([]);
@@ -42,10 +44,13 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/category/:slug" element={<CategoryPage />} />
-            <Route path="/shop" element={<Shop />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/about" element={<AboutUs />} />
+            <Route path="/shop" element={<Shop categories={categories} />} />
+             <Route path="/about" element={<AboutUs />} />
             <Route path="/contact" element={<ContactUs />} />
+            <Route path="/shipping" element={<ShippingInfo />} />
+            <Route path="/returns" element={<Returns />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
+            <Route path="/terms" element={<Terms />} />
             <Route
               path="/cart"
               element={
@@ -59,6 +64,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Favourite />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/checkout"
+              element={
+                <ProtectedRoute>
+                  <Checkout />
                 </ProtectedRoute>
               }
             />

@@ -9,18 +9,33 @@ import { useCart } from '../../context/CartContext';
 import { useFavourite } from '../../context/favouriteContext';
 
 import { useAuth } from '../../context/AuthContext';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const TopHeader = () => {
   const { isLoggedIn } = useAuth();
   const { totalItems } = useCart();
   const { favourites } = useFavourite();
+  const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    navigate(`/shop?q=${encodeURIComponent(searchTerm.trim())}`);
+    setSearchTerm('');
+  };
 
   return (
     <div className='top-header' >
       <div className='container'>
         <Link className='logo' to="/">  <img src={logo} alt="logo" /></Link>
-        <form action="" className='search-box'>
-          <input type="text" placeholder='Search...' />
+        <form onSubmit={handleSearch} className='search-box'>
+          <input 
+            type="text" 
+            placeholder='Search...' 
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
           <button type='submit'> <FaSearch/></button>
         </form>
         <div className="header-icon">

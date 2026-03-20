@@ -12,7 +12,6 @@ import { useAuth } from '../../context/AuthContext';
 const Navlinks = [
   {name: "Home", path: "/"},
   {name: "Shop", path: "/shop"},
-  {name: "Blog", path: "/blog"},
   {name: "About Us", path: "/about"},
   {name: "Contact", path: "/contact"},
 ]
@@ -28,8 +27,7 @@ function Navbar(props) {
     logout();
     navigate('/login');
   };
-  
-  
+
   return (
     <div className='navbar'>
       <div className="container">

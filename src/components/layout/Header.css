@@ -54,13 +54,17 @@
 }
 
 .top-header .container .search-box button {
-  color: var(--p_color);
+  color: var(--main-color, #6c5ce7);
+  background: none;
+  border: none;
   padding: 5px;
   font-size: 18px;
   transition: var(--transition);
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  outline: none;
 }
 
 .top-header .container .search-box button:hover {
