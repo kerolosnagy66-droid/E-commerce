@@ -1,10 +1,13 @@
 import React, { createContext, useState, useEffect, useContext, useMemo } from 'react'
 import { toast } from 'react-hot-toast';
 
+import { useAuth } from './AuthContext';
+
 export const CartContext = createContext();
 export const useCart = () => useContext(CartContext);
 
-export const CartProvider = ({ children, isLoggedIn }) => {
+export const CartProvider = ({ children }) => {
+    const { isLoggedIn } = useAuth();
     const [cart, setCart] = useState(() => {
         const savedCart = localStorage.getItem('cart');
         return savedCart ? JSON.parse(savedCart) : [];

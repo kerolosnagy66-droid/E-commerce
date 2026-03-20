@@ -1,14 +1,17 @@
 import React from 'react'
 import './Header.css'
-import logo from '../../img/logo.png'
+import logo from '../../assets/images/logo.png'
 import { Link } from 'react-router-dom';
 import { FaSearch } from "react-icons/fa";
 import { FiHeart } from "react-icons/fi";
 import { BsCart4 } from "react-icons/bs";
-import { useCart } from '../context/CartContext';
-import { useFavourite } from '../context/favouriteContext';
+import { useCart } from '../../context/CartContext';
+import { useFavourite } from '../../context/favouriteContext';
 
-const TopHeader = ({ isLoggedIn }) => {
+import { useAuth } from '../../context/AuthContext';
+
+const TopHeader = () => {
+  const { isLoggedIn } = useAuth();
   const { totalItems } = useCart();
   const { favourites } = useFavourite();
 

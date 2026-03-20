@@ -1,8 +1,8 @@
 import React from 'react';
-import { useFavourite } from '../components/context/favouriteContext';
+import { useFavourite } from '../../context/favouriteContext';
 import { Link } from 'react-router-dom';
 import { FaTrash } from 'react-icons/fa';
-import './favourite.css';
+import './Favourite.css';
 
 const Favourite = () => {
     const { favourites, removeFromFavourite } = useFavourite();

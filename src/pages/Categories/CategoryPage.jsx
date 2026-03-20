@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import SlideProducts from '../components/slideProducts/SlideProducts';
+import SlideProducts from '../../components/Home/SlideProducts';
 
 const CategoryPage = ({allProducts}) => {
   const { slug } = useParams();

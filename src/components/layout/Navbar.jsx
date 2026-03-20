@@ -1,34 +1,32 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { IoMdMenu } from "react-icons/io";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { MdOutlineLogin, MdOutlineLogout } from "react-icons/md";
 import { FaUserPlus } from "react-icons/fa6";
-import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
+
+import { useAuth } from '../../context/AuthContext';
 
 const Navlinks = [
   {name: "Home", path: "/"},
   {name: "Shop", path: "/shop"},
   {name: "Blog", path: "/blog"},
-  {name: "About", path: "/about"},
+  {name: "About Us", path: "/about"},
   {name: "Contact", path: "/contact"},
 ]
 
 function Navbar(props) {
+  const { isLoggedIn, logout } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
-  const {isLoggedIn, categories} = props;
+  const { categories } = props;
   const [showCategories, setShowCategories] = useState(false);
   
   const handleLogOut = () => {
-    if (props.logOut) {
-      props.logOut();
-    } else {
-      toast.success('Successfully logged out!');
-      navigate('/login');
-    }
+    logout();
+    navigate('/login');
   };
   
   
@@ -67,9 +65,8 @@ function Navbar(props) {
             </>
           ) : (
             <span 
-              className="nav-link" 
+              className="nav-link logout-btn" 
               onClick={handleLogOut} 
-              style={{color:'red', cursor:'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '15px', fontWeight: '500'}}
             >
               <MdOutlineLogout style={{fontSize: '20px'}} />Logout
             </span>

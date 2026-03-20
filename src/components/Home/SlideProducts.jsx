@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import Products from './Products'
 
-const localImages = require.context('../../img', true, /\.(jpg|jpeg|png|webp)$/);
+const localImages = require.context('../../assets/images', true, /\.(jpg|jpeg|png|webp)$/);
 
 const SlideProducts = React.memo(({ title, categorySlug, allProducts }) => {
   const filteredProducts = useMemo(() => {

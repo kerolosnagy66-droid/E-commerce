@@ -7,8 +7,8 @@ import { Pagination, Autoplay } from 'swiper/modules';
 import { FaStar, FaStarHalfStroke, FaHeart, FaCartPlus } from "react-icons/fa6";
 import { IoIosShareAlt } from "react-icons/io";
 import { Link } from 'react-router-dom';
-import { useCart } from '../context/CartContext';
-import { useFavourite } from '../context/favouriteContext';
+import { useCart } from '../../context/CartContext';
+import { useFavourite } from '../../context/favouriteContext';
 import { FaCheck } from "react-icons/fa6";
 
 const Products = React.memo(({ title, productList }) => {

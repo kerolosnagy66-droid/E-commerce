@@ -1,9 +1,12 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 
+import { useAuth } from './AuthContext';
+
 const FavouriteContext = createContext();
 
-export const FavouriteProvider = ({ children, isLoggedIn }) => {
+export const FavouriteProvider = ({ children }) => {
+    const { isLoggedIn } = useAuth();
     const [favourites, setFavourites] = useState(() => {
         const savedFavourites = localStorage.getItem('favourites');
         return savedFavourites ? JSON.parse(savedFavourites) : [];

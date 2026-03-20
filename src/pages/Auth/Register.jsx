@@ -1,9 +1,10 @@
 import { useState } from 'react'
+import './Register.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
 import Joi from 'joi'
 
-const Register = ({ setIsLoggedIn }) => {
+const Register = () => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')

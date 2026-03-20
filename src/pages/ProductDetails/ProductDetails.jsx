@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import useFetch from '../hooks/useFetch'
-import Loading from '../components/Loading'
+import useFetch from '../../hooks/useFetch'
+import Loading from '../../components/common/Loading'
 import { FaHeart, FaCartPlus, FaCheck } from "react-icons/fa6";
 import { IoIosShareAlt } from "react-icons/io";
 import './ProductDetails.css';
-import { useCart } from '../components/context/CartContext';
+import { useCart } from '../../context/CartContext';
 
 function ProductDetails() {
     const { id } = useParams();

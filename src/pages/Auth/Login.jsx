@@ -1,9 +1,11 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import './Login.css'
+import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
-import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../../context/AuthContext'
 
-const Login = ({ setIsLoggedIn }) => {
+const Login = () => {
+    const { login } = useAuth()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [remember, setRemember] = useState(false)
@@ -12,7 +14,7 @@ const Login = ({ setIsLoggedIn }) => {
         e.preventDefault()
         if (email && password) {
             toast.success('Successfully logged in!')
-            setIsLoggedIn(true)
+            login()
             setTimeout(() => {
                 navigate('/')
             }, 1000)

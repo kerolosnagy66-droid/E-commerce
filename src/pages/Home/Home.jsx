@@ -1,8 +1,8 @@
 import React from 'react'
-import HeroSlider from '../components/heroslider/HeroSlider'
-import SlideProducts from '../components/slideProducts/SlideProducts'
-import Loading from '../components/Loading'
-import useFetch from '../hooks/useFetch'
+import HeroSlider from '../../components/Home/HeroSlider'
+import SlideProducts from '../../components/Home/SlideProducts'
+import Loading from '../../components/common/Loading'
+import useFetch from '../../hooks/useFetch'
 
 function Home({ categories }) {
     const { data, loading, error } = useFetch('https://dummyjson.com/products?limit=200');

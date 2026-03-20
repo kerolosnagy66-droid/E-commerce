@@ -5,7 +5,7 @@ import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import './HeroSlider.css';
 
-const imageContext = require.context('../../img', false, /\.(jpg|jpeg|png|webp)$/);
+const imageContext = require.context('../../assets/images', false, /\.(jpg|jpeg|png|webp)$/);
 const allImages = imageContext.keys()
   .filter(path => !path.includes('logo')) // Exclude logo from slider
   .map(imageContext);
