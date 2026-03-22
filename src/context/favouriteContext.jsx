@@ -16,6 +16,12 @@ export const FavouriteProvider = ({ children }) => {
         localStorage.setItem('favourites', JSON.stringify(favourites));
     }, [favourites]);
 
+    useEffect(() => {
+        if (!isLoggedIn) {
+            setFavourites([]);
+        }
+    }, [isLoggedIn]);
+
     const addToFavourite = (product) => {
         if (!isLoggedIn) {
             toast.error('Please login to add items to your wishlist!');

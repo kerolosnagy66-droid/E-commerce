@@ -15,6 +15,8 @@ export const AuthProvider = ({ children }) => {
 
     const logout = () => {
         localStorage.setItem('isLoggedIn', 'false');
+        localStorage.removeItem('cart');
+        localStorage.removeItem('favourites');
         setIsLoggedIn(false);
         toast.success('Successfully logged out!');
     };

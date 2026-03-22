@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { IoMdMenu } from "react-icons/io";
+import { IoMdMenu, IoMdClose } from "react-icons/io";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { MdOutlineLogin, MdOutlineLogout } from "react-icons/md";
 import { FaUserPlus } from "react-icons/fa6";
@@ -22,6 +22,7 @@ function Navbar(props) {
   const navigate = useNavigate();
   const { categories } = props;
   const [showCategories, setShowCategories] = useState(false);
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   
   const handleLogOut = () => {
     logout();
@@ -47,28 +48,34 @@ function Navbar(props) {
           </div>
         </div>
 
-        <ul className="nav_links">
-          {Navlinks.map((item, index) => (
-            <li key={index} className={location.pathname === item.path ? "active" : ""}>
-              <Link to={item.path}>{item.name}</Link>
-            </li>
-          ))}
-        </ul>
+        <div className="mobile-toggle" onClick={() => setIsMobileNavOpen(!isMobileNavOpen)}>
+          {isMobileNavOpen ? <IoMdClose /> : <IoMdMenu />}
+        </div>
 
-        <div className='header_icon'>
-          {!isLoggedIn ? (
-            <>
-              <Link to="/login" className={location.pathname === "/login" ? "active" : ""}><MdOutlineLogin />Login</Link>
-              <Link to="/register" className={location.pathname === "/register" ? "active" : ""}><FaUserPlus />Register</Link>
-            </>
-          ) : (
-            <span 
-              className="nav-link logout-btn" 
-              onClick={handleLogOut} 
-            >
-              <MdOutlineLogout style={{fontSize: '20px'}} />Logout
-            </span>
-          )}
+        <div className={`navbar-mobile-menu ${isMobileNavOpen ? "open" : ""}`}>
+          <ul className="nav_links">
+            {Navlinks.map((item, index) => (
+              <li key={index} className={location.pathname === item.path ? "active" : ""}>
+                <Link to={item.path} onClick={() => setIsMobileNavOpen(false)}>{item.name}</Link>
+              </li>
+            ))}
+          </ul>
+
+          <div className='header_icon'>
+            {!isLoggedIn ? (
+              <>
+                <Link to="/login" className={location.pathname === "/login" ? "active" : ""} onClick={() => setIsMobileNavOpen(false)}><MdOutlineLogin />Login</Link>
+                <Link to="/register" className={location.pathname === "/register" ? "active" : ""} onClick={() => setIsMobileNavOpen(false)}><FaUserPlus />Register</Link>
+              </>
+            ) : (
+              <span 
+                className="nav-link logout-btn" 
+                onClick={handleLogOut} 
+              >
+                <MdOutlineLogout style={{fontSize: '20px'}} />Logout
+              </span>
+            )}
+          </div>
         </div>
       </div>
     </div>

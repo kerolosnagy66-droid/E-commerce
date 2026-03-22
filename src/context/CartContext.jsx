@@ -16,6 +16,12 @@ export const CartProvider = ({ children }) => {
         localStorage.setItem('cart', JSON.stringify(cart));
     }, [cart]);
 
+    useEffect(() => {
+        if (!isLoggedIn) {
+            setCart([]);
+        }
+    }, [isLoggedIn]);
+
     const totalItems = useMemo(() => {
         return cart.reduce((acc, item) => acc + item.quantity, 0);
     }, [cart]);

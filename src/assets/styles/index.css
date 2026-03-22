@@ -89,7 +89,6 @@ button {
   padding: 0 15px;
 }
 
-/* Loading States */
 .loading-container {
   display: flex;
   flex-direction: column;
@@ -113,7 +112,6 @@ button {
   letter-spacing: 0.5px;
 }
 
-/* Auth Components Shared Styles */
 .auth-container {
     display: flex;
     justify-content: center;
